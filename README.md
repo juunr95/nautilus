@@ -6,14 +6,13 @@ Nautilus is an easy and reliable middleware to handle authentication for Express
 
 - Simplifies authentication in Express.JS
 - Lightweight and easy to integrate
-- Configurable options for various authentication strategies
 
 ## Installation
 
 To install Nautilus, use npm:
 
 ```bash
-npm install nautilus
+npm install nautilus-auth
 ```
 
 ## Usage
@@ -22,7 +21,7 @@ To use Nautilus in your Express application, import and configure it as middlewa
 
 ```javascript
 const express = require('express');
-const nautilus = require('nautilus');
+const nautilus = require('nautilus-auth');
 
 const app = express();
 
