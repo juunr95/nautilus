@@ -1,5 +1,5 @@
 {
-  "name": "nautilus",
+  "name": "nautilus-auth",
   "version": "1.0.0",
   "description": "An easy and reliable middleware to handle authentication for Express.JS",
   "repository": "juunr95/nautilus",
@@ -16,7 +16,8 @@
   "license": "ISC",
   "files": [
     "LICENSE",
-    "index.js"
+    "index.js",
+    "constants.js"
   ],
   "devDependencies": {
     "@eslint/js": "^9.6.0",
