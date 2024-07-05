@@ -1,0 +1,26 @@
+{
+  "name": "nautilus",
+  "version": "1.0.0",
+  "description": "An easy and reliable middleware to handle authentication for Express.JS",
+  "repository": "juunr95/nautilus",
+  "type": "commonjs",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "authentication",
+    "middleware"
+  ],
+  "author": "de Oliveira Junior, Claudio Cesar <cjunior.oliveira@icloud.com>",
+  "license": "ISC",
+  "files": [
+    "LICENSE",
+    "index.js"
+  ],
+  "devDependencies": {
+    "@eslint/js": "^9.6.0",
+    "eslint": "^9.6.0",
+    "globals": "^15.8.0"
+  }
+}
