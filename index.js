@@ -2,6 +2,11 @@ const constants = require('./constants.js');
 
 module.exports = auth;
 
+/*
+ * Expected keys on options object.
+ */
+const expected_keys = ['username', 'password'];
+
 /**
  * Init the authentication.
  * 
@@ -12,11 +17,11 @@ function auth(options) {
     throw Error('Options need to be and object with username and password.');
   }
 
-  const { username, password } = options;
-
-  if (username.length === 0 || password.length === 0) {
-    throw Error('Username and password cannot be null.');
+  if (!expected_keys.every(key => options.hasOwnProperty(key))) {
+    throw Error("Options object doesn't contain expected keys.");
   }
+
+  const { username, password } = options;
 
   return function (req, res, next) {
     const { authorization } = req.headers;
