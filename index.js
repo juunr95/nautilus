@@ -1,11 +1,19 @@
 const constants = require('./constants.js');
+const crypto = require('crypto');
+
+const { Buffer } = require('node:buffer');
 
 module.exports = auth;
 
-/*
- * Expected keys on options object.
+/**
+ * Function that safe compare strings.
+ * 
+ * @param {Buffer} a - The first item.
+ * @param {Buffer} b - The second item.
  */
-const expected_keys = ['username', 'password'];
+function safeCompare(a, b) {
+  return crypto.timingSafeEqual(a, b);
+}
 
 /**
  * Init the authentication.
@@ -13,12 +21,14 @@ const expected_keys = ['username', 'password'];
  * @param {Object} options - Object with username and password.
  */
 function auth(options) {
-  if (typeof options !== 'object') {
-    throw Error('Options need to be and object with username and password.');
+  if (typeof options !== 'object' || options === null) {
+    throw new Error('Options must be an object.');
   }
 
-  if (!expected_keys.every(key => options.hasOwnProperty(key))) {
-    throw Error("Options object doesn't contain expected keys.");
+  for (const key of constants.EXPECTED_KEYS) {
+    if (!Object.prototype.hasOwnProperty.call(options, key)) {
+      throw new Error(`Options object must contain the key: ${key}`);
+    }
   }
 
   const { username, password } = options;
@@ -30,8 +40,6 @@ function auth(options) {
       res.status(401)
         .header('WWW-Authenticate', 'Basic realm="User Visible Real"')
         .end(constants.UNAUTHORIZED);
-
-      return;
     }
 
     // Check if there's authorization header. If not block request.
@@ -39,12 +47,27 @@ function auth(options) {
       return unauthorized();
     }
 
-    // Get the encrypted credentials and convert it back to text.
-    const [, encrypted_credentials ] = authorization.split(' ');
-    const [ user, pass ] = atob(encrypted_credentials).split(':');
+    // Get the encrypted credentials.
+    const [ type, sent_credentials ] = authorization.split(' ');
+    if (!type || type !== 'Basic') {
+      return unauthorized();
+    }
+
+    // The credentials sent by browser is already base64 encoded.
+    // So just create the buffer using base64 as encoder.
+    const buffer_credentials = Buffer.from(sent_credentials, 'base64');
+
+    // Create buffer with combination of username:password
+    const credentials = Buffer.from(`${username}:${password}`);
+
+    // If size of buffer are different, we know that most probably
+    // credentials are wrong.
+    if (buffer_credentials.length !== credentials.length) {
+      return unauthorized();
+    }
 
     // Check if username and password matchs. If not block request.
-    if (user !== username || pass !== password) {
+    if (!safeCompare(buffer_credentials, credentials)) {
       return unauthorized();
     }
 
