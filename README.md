@@ -1,3 +1,5 @@
+![Image](https://i.ibb.co/hKXcTj6/pikaso-texttoimage-Create-a-minimalist-cartoon-logo-for-my-npm-packag-removebg.png)
+____
 # Nautilus
 
 Nautilus is an easy and reliable middleware to handle basic authentication for Express.JS applications.
