@@ -1,4 +1,7 @@
-![Image](https://i.ibb.co/hKXcTj6/pikaso-texttoimage-Create-a-minimalist-cartoon-logo-for-my-npm-packag-removebg.png)
+<p align="center">
+    <img src="https://i.ibb.co/hKXcTj6/pikaso-texttoimage-Create-a-minimalist-cartoon-logo-for-my-npm-packag-removebg.png" width="180"/>
+</p>
+
 ____
 # Nautilus
 
