@@ -1,6 +1,6 @@
 # Nautilus
 
-Nautilus is an easy and reliable middleware to handle authentication for Express.JS applications.
+Nautilus is an easy and reliable middleware to handle basic authentication for Express.JS applications.
 
 ## Features
 
