@@ -1,6 +1,6 @@
 {
   "name": "nautilus-auth",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "An easy and reliable middleware to handle basic authentication for Express.JS",
   "repository": "juunr95/nautilus",
   "type": "commonjs",
