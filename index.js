@@ -1,5 +1,6 @@
 const constants = require('./constants.js');
-const crypto = require('crypto');
+const { timingSafeEqual } = require('crypto');
+const { MissingObjectKeys } = require('./errors.js');
 
 const { Buffer } = require('node:buffer');
 
@@ -12,7 +13,7 @@ module.exports = auth;
  * @param {Buffer} b - The second item.
  */
 function safeCompare(a, b) {
-  return crypto.timingSafeEqual(a, b);
+  return timingSafeEqual(a, b);
 }
 
 /**
@@ -22,12 +23,12 @@ function safeCompare(a, b) {
  */
 function auth(options) {
   if (typeof options !== 'object' || options === null) {
-    throw new Error('Options must be an object.');
+    throw new MissingObjectKeys('Missing options object');
   }
 
   for (const key of constants.EXPECTED_KEYS) {
     if (!Object.prototype.hasOwnProperty.call(options, key)) {
-      throw new Error(`Options object must contain the key: ${key}`);
+      throw new MissingObjectKeys(`Options object must contain the key: ${key}`);
     }
   }
 
